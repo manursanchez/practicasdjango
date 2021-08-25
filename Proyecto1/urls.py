@@ -20,7 +20,7 @@ from Proyecto1.views import calculaEdad, calculaEdad2, dameFecha, saludo, dameFe
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo/', saludo),
-    path('fecha/', dameFecha),
+    path('fecha/', dameFecha), # pasar un parámetro
     path('edades/<int:ano>', calculaEdad), # Pasamos un solo parámetro
     path('calculoedades/<int:edad>/<int:ano>', calculaEdad2), # Pasar más de un parámetro
 ]

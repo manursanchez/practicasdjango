@@ -1,21 +1,36 @@
 from typing import ContextManager
 from django.http import HttpResponse
 import datetime
-from django.template import Template, Context, context
+from django.template import Template, Context
 
 # A cada función que creemos aquí, le denominamos vista
+class Persona(object):
+    def __init__(self,nombre,apellido):
+        self.nombre=nombre
+        self.apellido=apellido
 
 # Primera vista
 def saludo(request):
+    
+    #Creo una variable
+    nombre="Manolito"
+    apellido="Cyberchorbo"
+    p1=Persona("Alumno manolito","cyberchorbo")
+    
+    # Paso de objetos
+    objeto=datetime.datetime.now() #Almaceno la fecha y hora del sistema
+
+
     #Plantillas
-    doc_externo=open("C:/Users/mrsanchez/OneDrive - UNED/Proyectos_django/Proyecto1/Proyecto1/plantillas_django/miplantilla.html")
+    doc_externo=open("C:/Users/manue/OneDrive - UNED/Proyectos_django/Proyecto1/Proyecto1/plantillas_django/miplantilla.html")
     
     #Creamos el objeto template
     plt=Template(doc_externo.read())
     doc_externo.close()
 
-    #Creamos el contexto
-    ctx=Context()
+    #Creamos el contexto desde el que pasamos variables y objetos a las plantillas
+    ctx=Context({"objeto_date":objeto, "nombre_persona":p1.nombre, "Apellido_persona":p1.apellido, "valor":" esto es un valor"}) # los valores de las variables las pasamos en forma de diccionario
+                                                                        # podemos poner el valor directamente entrecomillado
     documento=plt.render(ctx)
 
     return HttpResponse(documento)
