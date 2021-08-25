@@ -1,17 +1,23 @@
+from typing import ContextManager
 from django.http import HttpResponse
 import datetime
+from django.template import Template, Context, context
 
 # A cada función que creemos aquí, le denominamos vista
 
 # Primera vista
 def saludo(request):
-    documento=""" <html>
-    <body>
-    <h1>
-    Hola Manolito
-    </h1>
-    </body>
-    </html>"""
+    #Plantillas
+    doc_externo=open("C:/Users/mrsanchez/OneDrive - UNED/Proyectos_django/Proyecto1/Proyecto1/plantillas_django/miplantilla.html")
+    
+    #Creamos el objeto template
+    plt=Template(doc_externo.read())
+    doc_externo.close()
+
+    #Creamos el contexto
+    ctx=Context()
+    documento=plt.render(ctx)
+
     return HttpResponse(documento)
 
 def dameFecha(request):
